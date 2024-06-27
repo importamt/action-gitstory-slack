@@ -4,7 +4,7 @@
 
 GitHub action for notifying to slack when pushed or merged to the repository.
 
-Gitstory means ```Git + History``` 😅
+Gitstory means `Git + History` 😅
 
 ## How to use?
 
@@ -28,7 +28,7 @@ on:
     branches:
       - master
   pull_request:
-    types: [ closed ]
+    types: [closed]
 
 jobs:
   slack_notification:
