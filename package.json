@@ -1,0 +1,36 @@
+{
+  "name": "action-gitstory-slack",
+  "version": "1.0.0",
+  "description": "This action sends a slack message with the git history of the push event",
+  "main": "lib/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/importamt/action-gitstory-slack.git"
+  },
+  "keywords": [
+    "action",
+    "slack",
+    "git",
+    "push",
+    "merge",
+    "commitlog",
+    "commit",
+    "githubaction"
+  ],
+  "author": "importamt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/importamt/action-gitstory-slack/issues"
+  },
+  "homepage": "https://github.com/importamt/action-gitstory-slack#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.5.0",
+    "eslint": "^9.5.0",
+    "globals": "^15.6.0",
+    "prettier": "^3.3.2",
+    "typescript": "^5.5.2"
+  }
+}
