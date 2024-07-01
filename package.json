@@ -1,12 +1,12 @@
 {
   "name": "action-gitstory-slack",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "This action sends a slack message with the git history of the push event",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
     "package": "ncc build -m",
-    "release": "npm run build && npm run pack",
+    "release": "npm run build && npm run package",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare-release": "./scripts/prepare-release.sh"
   },
