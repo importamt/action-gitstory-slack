@@ -36,8 +36,10 @@ jobs:
     steps:
       - name: Notify to slack
         uses: importamt/action-gitstory-slack@v1
-        with:
-          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        env:
+          # generate secret in the repository settings
+          WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
+          BEFORE_REF: ${{ github.event.before }}
 ```
 
 ### 4. Push to the repository
