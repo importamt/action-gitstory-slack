@@ -4,3 +4,6 @@ author: importamt
 runs:
   main: 'dist/index.js'
   using: 'node20'
+branding:
+    icon: 'star'
+    color: 'gray-dark'
