@@ -1,6 +1,6 @@
 {
   "name": "action-gitstory-slack",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "This action sends a slack message with the git history of the push event",
   "main": "lib/main.js",
   "scripts": {
