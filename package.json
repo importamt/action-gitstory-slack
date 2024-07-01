@@ -4,6 +4,9 @@
   "description": "This action sends a slack message with the git history of the push event",
   "main": "lib/main.js",
   "scripts": {
+    "build": "tsc",
+    "package": "ncc build -m",
+    "release": "npm run build && npm run pack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,9 +31,12 @@
   "homepage": "https://github.com/importamt/action-gitstory-slack#readme",
   "devDependencies": {
     "@eslint/js": "^9.5.0",
+    "@types/node": "^20.14.9",
+    "@vercel/ncc": "^0.38.1",
     "eslint": "^9.5.0",
     "globals": "^15.6.0",
     "prettier": "^3.3.2",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.2",
+    "typescript-eslint": "^8.0.0-alpha.10"
   }
 }

@@ -1,0 +1,6 @@
+name: action-gitstory-slack
+description: This action sends a slack message with the git history of the push event
+author: importamt
+runs:
+  main: 'dist/index.js'
+  using: 'node20'
