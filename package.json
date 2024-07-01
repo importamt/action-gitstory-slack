@@ -7,7 +7,8 @@
     "build": "tsc",
     "package": "ncc build -m",
     "release": "npm run build && npm run pack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare-release": "./scripts/prepare-release.sh"
   },
   "repository": {
     "type": "git",
