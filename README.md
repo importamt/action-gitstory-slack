@@ -26,19 +26,28 @@ name: Slack Notification
 on:
   push:
     branches:
-      - master
+      - '**' # all branches
   pull_request:
-    types: [closed]
+    branches:
+      - '**' # all branches
 
 jobs:
   slack_notification:
     runs-on: ubuntu-latest
     steps:
+      # checkout the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # fetch all history(you can adjust the depth)
+          fetch-depth: 0
       - name: Notify to slack
         uses: importamt/action-gitstory-slack@v1
         env:
-          # generate secret in the repository settings
-          WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
+          # set your timezone
+          TZ: Asia/Seoul
+          # set secret in the GitHub setting repository settings
+          WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           BEFORE_REF: ${{ github.event.before }}
 ```
 
