@@ -35,7 +35,12 @@ class Client {
       return;
     }
 
-    console.log('client send', this.webhookUrl, this.beforeRef);
+    // git init
+    execSync('git --version');
+    execSync('git config user.name "github-actions[bot]"');
+    execSync('git config user.email "<>"');
+    execSync('git status');
+
     const gitLogResult = execSync(
       `git log ${this.beforeRef ? `${this.beforeRef}..HEAD` : ''} --pretty=format:"%h##%an##%s##%d##%ae" -30`
     ).toString();
@@ -47,14 +52,17 @@ class Client {
 
     const deployer = this.getSlackUserIdFromEmail(commits[0].email);
 
+    const now = new Date();
+    // YYYY.MM.DD HH:mm
+    const today = `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
+
     const body = {
       blocks: [
         {
-          type: 'header',
+          type: 'section',
           text: {
-            type: 'plain_text',
-            text: `${this.branchName} has been updated :rocket:`,
-            emoji: true,
+            type: 'mrkdwn',
+            text: `*[${this.branchName}]* has been updated :rocket:`,
           },
         },
         {
@@ -62,10 +70,13 @@ class Client {
           elements: [
             {
               type: 'plain_text',
-              text: `Deployer: <@${deployer}>`,
+              text: `Date: ${today} :rocket:\nBy: <@${deployer}>`,
               emoji: true,
             },
           ],
+        },
+        {
+          type: 'divider',
         },
         {
           type: 'context',
