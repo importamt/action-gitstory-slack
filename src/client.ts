@@ -53,8 +53,10 @@ class Client {
     const deployer = this.getSlackUserIdFromEmail(commits[0].email);
 
     const now = new Date();
+
     // YYYY.MM.DD HH:mm
-    const today = `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()} ${now.getHours()}:${now.getMinutes()}`;
+    const zeroPad = (num: number) => num.toString().padStart(2, '0');
+    const today = `${now.getFullYear()}.${zeroPad(now.getMonth() + 1)}.${zeroPad(now.getDate())} ${zeroPad(now.getHours())}:${zeroPad(now.getMinutes())}`;
 
     const body = {
       blocks: [
@@ -70,7 +72,7 @@ class Client {
           elements: [
             {
               type: 'plain_text',
-              text: `Date: ${today} :rocket:\nBy: <@${deployer}>`,
+              text: `Branch: ${this.branchName}\nDate: ${today} :rocket:\nBy: <@${deployer}>`,
               emoji: true,
             },
           ],
