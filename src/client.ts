@@ -25,10 +25,6 @@ class Client {
     this.beforeRef = beforeRef;
   }
 
-  private getSlackUserIdFromEmail(email: string) {
-    return email.split('@')[0];
-  }
-
   send() {
     if (!this.webhookUrl) {
       console.error('webhookUrl is required');
@@ -50,8 +46,6 @@ class Client {
       return { hash, author, message, tags, email };
     });
 
-    const deployer = this.getSlackUserIdFromEmail(commits[0].email);
-
     const now = new Date();
 
     // YYYY.MM.DD HH:mm
@@ -72,7 +66,7 @@ class Client {
           elements: [
             {
               type: 'plain_text',
-              text: `Branch: ${this.branchName}\nDate: ${today} :rocket:\nBy: <@${deployer}>`,
+              text: `Branch: ${this.branchName}\nDate: ${today} :rocket:\nBy: ${commits[0].author}`,
               emoji: true,
             },
           ],
@@ -89,9 +83,7 @@ class Client {
                 .map((commit) => {
                   const githubCommitUrl = `https://github.com/${this.repositoryName}/commit/`;
 
-                  return `${commit.message} <${githubCommitUrl + commit.hash}|${commit.hash}> <@${this.getSlackUserIdFromEmail(
-                    commit.email
-                  )}>`;
+                  return `${commit.message} (<${githubCommitUrl + commit.hash}|${commit.hash}> - ${commit.author})`;
                 })
                 .join('\n'),
             },

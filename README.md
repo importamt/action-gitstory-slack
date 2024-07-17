@@ -37,10 +37,12 @@ jobs:
     steps:
       # checkout the repository
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           # fetch all history(you can adjust the depth)
           fetch-depth: 0
+          # gitstory uses .git directory for commit history
+          sparse-checkout: '.git'
       - name: Notify to slack
         uses: importamt/action-gitstory-slack@v1
         env:
