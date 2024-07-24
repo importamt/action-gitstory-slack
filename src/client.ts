@@ -37,8 +37,10 @@ class Client {
     execSync('git config user.email "<>"');
     execSync('git status');
 
+    const isNewBranch =
+      this.beforeRef === '0000000000000000000000000000000000000000';
     const gitLogResult = execSync(
-      `git log ${this.beforeRef ? `${this.beforeRef}..HEAD` : ''} --pretty=format:"%h##%an##%s##%d##%ae" -30`
+      `git log ${this.beforeRef && !isNewBranch ? `${this.beforeRef}..HEAD` : ''} --pretty=format:"%h##%an##%s##%d##%ae" -30`
     ).toString();
     const commits = gitLogResult.split('\n').map((line) => {
       const [hash, author, message, refs, email] = line.split('##');
@@ -66,7 +68,7 @@ class Client {
           elements: [
             {
               type: 'plain_text',
-              text: `Branch: ${this.branchName}\nDate: ${today} :rocket:\nBy: ${commits[0].author}`,
+              text: `Repo: ${this.repositoryName}\nBranch: ${this.branchName}\nDate: ${today} \nBy: ${commits[0].author}`,
               emoji: true,
             },
           ],
@@ -79,13 +81,15 @@ class Client {
           elements: [
             {
               type: 'mrkdwn',
-              text: commits
-                .map((commit) => {
-                  const githubCommitUrl = `https://github.com/${this.repositoryName}/commit/`;
+              text: isNewBranch
+                ? 'A new branch has been created :star2:'
+                : commits
+                    .map((commit) => {
+                      const githubCommitUrl = `https://github.com/${this.repositoryName}/commit/`;
 
-                  return `${commit.message} (<${githubCommitUrl + commit.hash}|${commit.hash}> - ${commit.author})`;
-                })
-                .join('\n'),
+                      return `${commit.message} (<${githubCommitUrl + commit.hash}|${commit.hash}> - ${commit.author})`;
+                    })
+                    .join('\n'),
             },
           ],
         },
