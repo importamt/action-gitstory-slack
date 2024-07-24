@@ -44,7 +44,7 @@ jobs:
           # gitstory uses .git directory for commit history
           sparse-checkout: '.git'
       - name: Notify to slack
-        uses: importamt/action-gitstory-slack@v1
+        uses: importamt/action-gitstory-slack@v1.0.7
         env:
           # set your timezone
           TZ: Asia/Seoul
